@@ -10,4 +10,3 @@ dependencies {
     implementation(localGroovy())
 }
 
-kotlin { jvmToolchain(21) }

@@ -248,9 +248,9 @@ fun CustomCommandTaskItem(
                                     animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
                                 )
                             if (progress < 0)
-                                CircularProgressIndicator(
+                                @OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
+                                androidx.compose.material3.LoadingIndicator(
                                     modifier = Modifier.padding(8.dp).size(24.dp),
-                                    strokeWidth = 5.dp,
                                     color = accentColor,
                                 )
                             else

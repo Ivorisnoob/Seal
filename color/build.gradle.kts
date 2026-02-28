@@ -12,9 +12,9 @@ kotlin {
     jvmToolchain(21)
 }
 android {
-    compileSdk = 34
+    compileSdk = 36
     defaultConfig {
-        minSdk = 21
+        minSdk = 31
     }
     namespace = "com.junkfood.seal.color"
     compileOptions {

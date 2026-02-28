@@ -402,7 +402,8 @@ private fun DownloadDialogContent(
 
             is Loading -> {
                 Column(modifier = Modifier.fillMaxWidth().padding(vertical = 120.dp)) {
-                    CircularProgressIndicator(
+                    @OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
+                    androidx.compose.material3.LoadingIndicator(
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
                 }
@@ -941,6 +942,7 @@ internal fun Header(modifier: Modifier = Modifier, icon: ImageVector, title: Str
     }
 }
 
+@OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun DownloadTypeSelectionGroup(
     modifier: Modifier = Modifier,
@@ -960,12 +962,20 @@ private fun DownloadTypeSelectionGroup(
             }
         }
     } else {
-        SingleChoiceSegmentedButtonRow(modifier = modifier.fillMaxWidth()) {
+        Row(
+            modifier = modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(androidx.compose.material3.ButtonGroupDefaults.ConnectedSpaceBetween)
+        ) {
             typeEntries.forEachIndexed { index, type ->
-                SingleChoiceSegmentedButton(
-                    selected = selectedType == type,
-                    onClick = { onSelect(type) },
-                    shape = SegmentedButtonDefaults.itemShape(index, typeCount),
+                androidx.compose.material3.ToggleButton(
+                    checked = selectedType == type,
+                    onCheckedChange = { if (it) onSelect(type) },
+                    shapes = when (index) {
+                        0 -> androidx.compose.material3.ButtonGroupDefaults.connectedLeadingButtonShapes()
+                        typeCount - 1 -> androidx.compose.material3.ButtonGroupDefaults.connectedTrailingButtonShapes()
+                        else -> androidx.compose.material3.ButtonGroupDefaults.connectedMiddleButtonShapes()
+                    },
+                    modifier = Modifier.weight(1f)
                 ) {
                     Text(text = type.label())
                 }

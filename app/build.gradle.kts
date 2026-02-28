@@ -26,7 +26,7 @@ val baseVersionName = currentVersion.name
 val currentVersionCode = currentVersion.code.toInt()
 
 android {
-    compileSdk = 35
+    compileSdk = 36
 
     if (keystorePropertiesFile.exists()) {
         val keystoreProperties = Properties()
@@ -45,8 +45,8 @@ android {
 
     defaultConfig {
         applicationId = "com.junkfood.seal"
-        minSdk = 24
-        targetSdk = 35
+        minSdk = 31
+        targetSdk = 36
         versionCode = 200_000_150
         check(versionCode == currentVersionCode)
 
@@ -59,7 +59,7 @@ android {
                 abi {
                     isEnable = true
                     reset()
-                    include("arm64-v8a", "armeabi-v7a", "x86", "x86_64")
+                    include("arm64-v8a", "armeabi-v7a")
                     isUniversalApk = true
                 }
             }

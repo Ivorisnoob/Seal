@@ -455,7 +455,8 @@ fun ListItemStateText(
                 is FetchingInfo,
                 Idle,
                 ReadyWithInfo -> {
-                    CircularProgressIndicator(modifier = sizeModifier, strokeWidth = 2.5.dp)
+                    @OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
+                    androidx.compose.material3.LoadingIndicator(modifier = sizeModifier)
                 }
                 is Running -> {
                     val progress = downloadState.progress
@@ -642,10 +643,10 @@ private fun ProgressButton(modifier: Modifier = Modifier, progress: Float, onCli
                 .clickable(onClickLabel = stringResource(R.string.cancel), onClick = onClick)
     ) {
         if (progress < 0) {
-            CircularProgressIndicator(
+            @OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
+            androidx.compose.material3.LoadingIndicator(
                 modifier = Modifier.size(IconButtonSize).align(Alignment.Center),
-                color = ActionButtonContentColor,
-                trackColor = Color.Transparent,
+                color = ActionButtonContentColor
             )
         } else {
             CircularProgressIndicator(
